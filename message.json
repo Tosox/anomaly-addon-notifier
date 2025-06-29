@@ -2,21 +2,21 @@
   "embeds": [
     {
       "type": "rich",
-      "title": "{title}",
-      "description": "> {description}",
+      "title": "$title",
+      "description": "> $description",
       "color": 9308939,
-      "timestamp": "{timestamp}",
+      "timestamp": "$timestamp",
       "thumbnail": {
         "url": "https://static.moddb.com/cutoff/images/logos/rss.png"
       },
       "fields": [
         {
           "name": "Visit",
-          "value": "**[Open in browser ↗]({url})**"
+          "value": "**[Open in browser ↗]($url)**"
         }
       ],
       "image": {
-        "url": "{image_url}"
+        "url": "$image_url"
       },
       "footer": {
         "text": "via @tosox"

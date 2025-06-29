@@ -6,11 +6,12 @@ import time
 import toml
 from curl_cffi import requests
 from dataclasses import dataclass
+from string import Template
 from typing import List, Optional
 from xml.etree import ElementTree
 
 CONFIG = toml.load('config.toml')
-MESSAGE_TEMPLATE = json.loads(open('message.json', 'r').read())
+MESSAGE_TEMPLATE = Template(open('message.json', 'r', encoding='utf-8').read())
 LAST_CHECKED_FILENAME = 'last_update.txt'
 NAMESPACES = { 'media': 'http://search.yahoo.com/mrss/' }
 
@@ -55,13 +56,15 @@ def get_last_checked() -> int:
 		return 0
 
 def create_embed(addon: AddonData, formatted_ts: str) -> dict:
-	return MESSAGE_TEMPLATE.format(
+	safe_desc = addon.desc.replace('\n', ' ').replace('"', '\\"')
+	embed = MESSAGE_TEMPLATE.substitute(
 		title=addon.title,
-		description=addon.desc.replace('\n', ' '),
+		description=safe_desc,
 		timestamp=formatted_ts,
 		url=addon.url,
 		image_url=addon.img
 	)
+	return json.loads(embed)
 
 def fetch_rss_feed() -> Optional[str]:
 	try:
