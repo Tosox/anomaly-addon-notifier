@@ -29,7 +29,7 @@ pip install -r requirements.txt
 3. **Create Config Files**
 
 * `config.toml`: stores webhook urls, scheduler settings, and the RSS feed url
-* `message.json`: the message body (supports {title}, {description}, {timestamp}, {url}, {image_url})
+* `message.json`: the message body (supports $title, $description, $timestamp, $url, $image_url)
 
 ## 📁 `config.toml` Configuration
 
