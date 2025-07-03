@@ -28,12 +28,12 @@ pip install -r requirements.txt
 
 3. **Create Config Files**
 
+Before running the script, you must create a `config.toml` and `message.json` file. There are a `config-example.toml` and `message-example.json` provided which you can copy and edit.
+
 * `config.toml`: stores webhook urls, scheduler settings, and the RSS feed url
 * `message.json`: the message body (supports $title, $description, $timestamp, $url, $image_url)
 
 ## 📁 `config.toml` Configuration
-
-Before running the script, you must create a `config.toml` file. There is a `config-example.toml` provided which you can copy and edit.
 
 ### ⌚ Script Schedule (`[schedule]`)
 
