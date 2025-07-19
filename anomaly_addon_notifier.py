@@ -10,9 +10,9 @@ from string import Template
 from typing import List, Optional
 from xml.etree import ElementTree
 
-CONFIG = toml.load('config.toml')
-MESSAGE_TEMPLATE = Template(open('message.json', 'r', encoding='utf-8').read())
-LAST_CHECKED_FILENAME = 'last_update.txt'
+CONFIG = toml.load('./config/config.toml')
+MESSAGE_TEMPLATE = Template(open('./config/message.json', 'r', encoding='utf-8').read())
+LAST_CHECKED_FILE = './config/last_update.txt'
 NAMESPACES = { 'media': 'http://search.yahoo.com/mrss/' }
 
 SCHEDULE_INTERVAL = CONFIG['schedule']['interval']
@@ -45,12 +45,12 @@ def fix_broken_xml_entities(text: str) -> str:
 	)
 
 def save_last_checked(timestamp: int):
-	with open(LAST_CHECKED_FILENAME, 'w') as file:
+	with open(LAST_CHECKED_FILE, 'w') as file:
 		file.write(f'{timestamp}\n')
 
 def get_last_checked() -> int:
 	try:
-		with open(LAST_CHECKED_FILENAME, 'r') as file:
+		with open(LAST_CHECKED_FILE, 'r') as file:
 			return int(file.readline())
 	except:
 		return 0
