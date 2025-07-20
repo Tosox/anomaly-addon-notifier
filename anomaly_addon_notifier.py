@@ -56,9 +56,10 @@ def get_last_checked() -> int:
 		return 0
 
 def create_embed(addon: AddonData, formatted_ts: str) -> dict:
-	safe_desc = addon.desc.replace('\n', ' ').replace('"', '\\"')
+	safe_title = addon.title.replace('"', '\\"').replace("\\", "\\\\")
+	safe_desc = addon.desc.replace('\n', ' ').replace('"', '\\"').replace("\\", "\\\\")
 	embed = MESSAGE_TEMPLATE.substitute(
-		title=addon.title,
+		title=safe_title,
 		description=safe_desc,
 		timestamp=formatted_ts,
 		url=addon.url,
