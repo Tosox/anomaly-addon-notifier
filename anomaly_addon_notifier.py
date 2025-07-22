@@ -56,11 +56,15 @@ def get_last_checked() -> int:
 		return 0
 
 def create_embed(addon: AddonData, formatted_ts: str) -> dict:
-	safe_title = addon.title.replace('"', '\\"').replace("\\", "\\\\")
-	safe_desc = addon.desc.replace('\n', ' ').replace('"', '\\"').replace("\\", "\\\\")
+	clean_title = addon.title.replace('\n', ' ')
+	clean_desc = addon.desc.replace('\n', ' ')
+
+	json_title = json.dumps(clean_title)[1:-1] # Remove outer quotes
+	json_desc = json.dumps(clean_desc)[1:-1]
+
 	embed = MESSAGE_TEMPLATE.substitute(
-		title=safe_title,
-		description=safe_desc,
+		title=json_title,
+		description=json_desc,
 		timestamp=formatted_ts,
 		url=addon.url,
 		image_url=addon.img
